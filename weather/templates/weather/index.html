@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Погода</title>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/fontawesome.min.css" integrity="sha384-jLKHWM3JRmfMU0A5x5AkjWkw/EYfGUAGagvnfryNV3F9VqM98XiIH7VBGVoxVSc7" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.6.2/css/bulma.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootswatch@4.5.2/dist/cyborg/bootstrap.min.css" integrity="sha384-nEnU7Ae+3lD52AK+RGNzgieBWMnEfgTbRHIwEvp1XXPdqdO6uLTd/NwXbzboqjc2" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.19.1/css/mdb.min.css" rel="stylesheet">
+
+</head>
+<body>
+
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid">
+      <a class="btn btn-outline-warning btn-rounded" data-mdb-ripple-color="dark"  href="https://openweathermap.org/">Сайт</a>
+      <a class="btn btn-outline-success btn-rounded" data-mdb-ripple-color="dark"  href="admin/">Администрация</a>
+        </div>
+  </nav>
+
+          <h2 class="text-info">Погода в городе</h2>
+    <section class="section">
+        <div class="container">
+            <div class="columns">
+                <div class="column is-offset-4 is-4">
+                    <form method="POST">
+                        {% csrf_token %}
+                        <div class="field has-addons">
+                            <div class="control is-expanded">
+
+                                {{ form.name }}
+                            </div>
+                             <div class="control">
+                                <button class="button is-info">
+                                    Посмотреть
+                                </button>
+                            </div>
+                            </div>
+                    </form>
+                </div>
+            </div>
+            </div>
+    </section>
+    <section class="container">
+        <div class="row">
+            <div class="col">
+                <div class="weather-card one">
+                    {% for weather in weather_data %}
+                    <div class="top">
+                        <article class="wrapper">
+                            <div class="mynav">
+                                <h3 class="heading">
+                                    <img src="http://openweathermap.org/img/w/{{ weather.icon }}.png" width="50" height="50" alt="Image">
+                                </h3>
+                            </div>
+                            <div class="media-content">
+                                <div class="content">
+                                    <p>
+                                        <h1 class="text-info">{{ weather.city }}</h1>
+                                        <br>
+
+                                        <span class="temp-value">{{ weather.temperature }}</span>
+                                        <span class="deg">°С</span>
+                                     <br class="">{{ weather.description }} <span id="wrapper-pressure"></span></br>
+
+                                </div>
+                                        </br>
+                                    </p>
+                                </div>
+                        </article>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </section>
+</body>
+<footer class="bg-dark text-center text-white">
+  <div class="container p-4">
+    <section class="mb-4">
+        <a style="color: #3b5998;" href="https://www.facebook.com/serj.petersson" role="button"
+  ><i class="fab fa-facebook-f fa-lg"></i
+        ></a>
+        <a  style="color: #55acee;;" href="https://github.com/SerjPetersson/SerjPetersson" role="button"><i class="fab fa-github fa-lg"></i
+        ></a>
+    </section>
+      <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0);">
+    © 2021 Copyright:
+    <a class="text-white" href="https://openweathermap.org/">OpenWeatherMap</a>
+  </div>
+  </div>
+  </footer>
+
+</html>
